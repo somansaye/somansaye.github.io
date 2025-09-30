@@ -100,3 +100,58 @@ body{font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Robo
 .call-button {
   animation: pulse 2s ease-in-out infinite;
 }
+/* ===== Mobile header: hamburger + slide-down menu ===== */
+
+/* Hamburger button */
+.hamburger{
+  display:none;                /* shown on mobile via media query */
+  width:40px;height:40px;
+  margin-left:auto;
+  border:0;background:transparent;padding:0;
+  cursor:pointer;
+}
+.hamburger span{
+  display:block;height:3px;width:28px;margin:7px auto;
+  background:var(--ink,#fff);
+  border-radius:2px;
+  transition:transform .25s ease, opacity .25s ease;
+}
+
+/* Default (desktop) – keep links inline */
+.nav .nav-links{ display:flex; gap:18px; align-items:center; }
+
+/* -------- Mobile layout -------- */
+@media (max-width:720px){
+  /* show hamburger, hide links by default */
+  .hamburger{ display:inline-block; }
+  .nav .nav-links{
+    position:fixed; left:0; right:0; top:64px;   /* below your header */
+    display:none; flex-direction:column; gap:6px;
+    padding:14px 16px;
+    background:#0e1624;                          /* match header color */
+    border-top:1px solid rgba(255,255,255,.06);
+    z-index:9998;
+    transform:translateY(-10px); opacity:0;
+    transition:transform .2s ease, opacity .2s ease;
+  }
+  .nav .nav-links a{
+    display:block; width:100%;
+    padding:12px 10px; border-radius:8px; text-decoration:none;
+  }
+  .nav .nav-links a:hover{ background:#161b28; }
+
+  /* Open state (toggled by JS) */
+  .menu-open .nav .nav-links{
+    display:flex;
+    transform:translateY(0); opacity:1;
+  }
+
+  /* Turn hamburger into X when open */
+  .menu-open .hamburger span:nth-child(1){ transform:translateY(10px) rotate(45deg); }
+  .menu-open .hamburger span:nth-child(2){ opacity:0; }
+  .menu-open .hamburger span:nth-child(3){ transform:translateY(-10px) rotate(-45deg); }
+
+  /* Make header a bit tighter on phones (optional) */
+  .header{ padding:10px 14px; }
+  .brand span{ font-size:16px; }
+}
