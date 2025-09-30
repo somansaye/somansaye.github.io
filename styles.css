@@ -155,12 +155,14 @@ body{font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Robo
   .header{ padding:10px 14px; }
   .brand span{ font-size:16px; }
 }
-/* Residential wide card */
 .residential-card {
-  grid-column: 1 / -1;   /* make it span the full row */
-  background: #1a1a1a;   /* same background as other cards */
-  border: 1px solid #2a2a2a; /* subtle border */
-  border-radius: 10px;
+  grid-column: 1 / -1; 
+  background: #1a1a1a;  /* matches other cards */
+  border-radius: 10px; 
   padding: 24px;
   margin-top: 20px;
+
+  /* subtle highlight */
+  border: 1px solid #2a2a2a;  /* thin, subtle border */
+  border-top: 4px solid #ffca3a; /* accent line for emphasis */
 }
