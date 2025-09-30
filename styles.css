@@ -38,6 +38,9 @@ body{font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Robo
 .icon-car::before{background-image:url('assets/icon-car.svg')}
 .icon-door::before{background-image:url('assets/icon-door.svg')}
 .icon-key::before{background-image:url('assets/icon-key.svg')}
+.icon-home::before {
+  background-image: url('assets/icon-home.svg');
+}
 .step{position:relative;padding-top:12px}
 .step-num{width:28px;height:28px;border-radius:50%;background:var(--brand-amber);color:#2b1b00;display:grid;place-items:center;font-weight:800;margin-bottom:8px}
 .faq details{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:0;overflow:hidden}
