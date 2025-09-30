@@ -79,3 +79,13 @@ body{font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Robo
 .call-button:hover {
   background-color: #c62828; /* Darker red */
 }
+/* Call Now button in hero section */
+.btn.primary[href^="tel:"] {
+  background-color: #e53935; /* Red */
+  color: #fff;
+  border: none;
+}
+
+.btn.primary[href^="tel:"]:hover {
+  background-color: #c62828; /* Darker red on hover */
+}
