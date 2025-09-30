@@ -57,3 +57,23 @@ body{font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Robo
 .footer-nav{display:flex;gap:10px;justify-content:center}
 .footer-nav a{color:var(--ink);text-decoration:none;padding:6px 8px;border-radius:8px}
 .footer-nav a:hover{background:#161b28}
+/* Floating Call Button */
+.call-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #e53935; /* Red */
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 14px 22px;
+  border-radius: 50px;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: background 0.3s ease;
+  z-index: 9999;
+}
+
+.call-button:hover {
+  background-color: #c62828; /* Darker red */
+}
