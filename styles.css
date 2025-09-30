@@ -157,7 +157,7 @@ body{font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Robo
 }
 .residential-card {
   grid-column: 1 / -1;         /* full width */
-  background: #1a1a2e;         /* same dark background as other cards */
+  background: var(--panel);  /* same as other service cards */
   border: 1px solid #f4c542;   /* subtle golden border to make it stand out */
   border-radius: 10px;
   padding: 24px;
