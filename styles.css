@@ -208,73 +208,93 @@ body{font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Robo
     direction: ltr; /* keep image left-to-right inside that block */
   }
 }
-/* Service highlight sections (Auto + Residential) */
-.service-highlight {
-  border-radius: 12px;
-  margin: 40px 0;
-}
+/* ──────────────────────────────────────────────
+   Photo + text highlight blocks (Auto + Residential)
+   ────────────────────────────────────────────── */
 
-.service-highlight > .container {
-  display: flex;
+.photo-section {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
   align-items: center;
-  gap: 40px;
-  padding: 40px;
+  margin: 48px 0;       /* no background here so it blends with the page */
 }
 
-/* Ensure text and lists stay aligned correctly */
-.service-highlight .content {
-  flex: 1 1 0;
-  min-width: 0;
-  text-align: left;
-}
-
-.service-highlight .image {
-  flex: 1 1 0;
-  min-width: 0;
-}
-
-.service-highlight img {
-  max-width: 100%;
+.photo-section__image img {
+  width: 100%;
   height: auto;
-  border-radius: 8px;
+  display: block;
   object-fit: cover;
+  border-radius: 12px;
 }
 
-/* Residential section: flip columns (image right, text left) */
-#services-residential > .container {
-  flex-direction: row-reverse;
+.photo-section__text h2 {
+  margin: 0 0 8px;
 }
 
-/* Checklist styles */
+.photo-section__text p {
+  margin: 0 0 16px;
+  line-height: 1.6;
+}
+
+.photo-section .btn.primary {
+  margin-top: 8px;
+}
+
+/* ──────────────────────────────────────────────
+   Checklist (always gold checks on all viewports)
+   ────────────────────────────────────────────── */
+
 .checklist {
-  list-style: none;
+  list-style: none;     /* remove browser bullets */
   padding: 0;
-  margin: 20px 0;
+  margin: 16px 0 20px;
 }
 
 .checklist li {
-  position: relative;        /* anchor the checkmark */
-  padding-left: 30px;        /* spacing for checkmark */
-  margin-bottom: 12px;
+  position: relative;
+  margin: 0 0 10px;
+  padding-left: 28px;   /* space for the checkmark (mobile & default) */
   font-size: 16px;
   line-height: 1.6;
-  color: #fff;               /* text stays readable */
 }
 
 .checklist li::before {
   content: "✔";
   position: absolute;
   left: 0;
-  top: 0.1em;
-  color: #f4c542 !important; /* lock gold color */
-  font-weight: bold;
+  top: 0;
+  color: #f4c542;       /* gold */
+  font-weight: 700;
 }
 
-/* Mobile adjustments */
-@media (max-width: 719px) {
-  .service-highlight > .container {
-    flex-direction: column;
-    gap: 20px;
-    padding: 24px;
+/* ──────────────────────────────────────────────
+   Desktop layout + residential flip/fix
+   ────────────────────────────────────────────── */
+
+@media (min-width: 720px) {
+  .photo-section {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+
+  /* Flip the residential row (image on the right, text on the left) */
+  .residential-work {
+    direction: rtl;
+  }
+
+  /* Keep the image itself normal reading order inside the flipped row */
+  .residential-work .photo-section__image {
+    direction: ltr;
+  }
+
+  /* When flipped, move the checkmark padding to the other side */
+  .residential-work .checklist li {
+    padding-left: 0;
+    padding-right: 28px;
+  }
+  .residential-work .checklist li::before {
+    left: auto;
+    right: 0;
   }
 }
