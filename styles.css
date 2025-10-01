@@ -379,3 +379,31 @@ body{font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Robo
   align-self: center;
   margin: 16px auto 0;
 }
+/* Center the whole text column on desktop, keep list tidy */
+@media (min-width: 900px) {
+  .photo-section__text {
+    align-items: center;      /* center the column */
+    text-align: center;       /* center headings + paragraph */
+    max-width: 620px;         /* comfortable measure */
+    margin: 0 auto;           /* center within its grid cell */
+  }
+
+  .photo-section__text .checklist {
+    padding-left: 0;          /* no extra left indent on the UL */
+  }
+
+  .photo-section__text .checklist li {
+    padding-left: 28px;       /* space for the check icon */
+    text-align: left;         /* each line stays tidy */
+  }
+
+  .photo-section__text .btn {
+    align-self: center;       /* button stays centered under list */
+    margin: 16px auto 0;
+  }
+}
+
+/* ensure gold checks everywhere (mobile & desktop) */
+.photo-section .checklist li::before {
+  color: #f4c542 !important;
+}
