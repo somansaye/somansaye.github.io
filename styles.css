@@ -208,93 +208,57 @@ body{font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Robo
     direction: ltr; /* keep image left-to-right inside that block */
   }
 }
-/* ──────────────────────────────────────────────
-   Photo + text highlight blocks (Auto + Residential)
-   ────────────────────────────────────────────── */
+/* --- Photo + text sections (Automotive & Residential) --- */
 
 .photo-section {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 24px;
+  gap: 28px;
   align-items: center;
-  margin: 48px 0;       /* no background here so it blends with the page */
+  margin: 48px 0;
 }
 
 .photo-section__image img {
   width: 100%;
   height: auto;
-  display: block;
+  border-radius: 10px;
   object-fit: cover;
-  border-radius: 12px;
 }
 
-.photo-section__text h2 {
-  margin: 0 0 8px;
-}
+/* Text */
+.photo-section__text h2 { margin: 0 0 12px; }
+.photo-section__text p  { margin: 0 0 16px; line-height: 1.6; }
 
-.photo-section__text p {
-  margin: 0 0 16px;
-  line-height: 1.6;
-}
-
-.photo-section .btn.primary {
-  margin-top: 8px;
-}
-
-/* ──────────────────────────────────────────────
-   Checklist (always gold checks on all viewports)
-   ────────────────────────────────────────────── */
-
-.checklist {
-  list-style: none;     /* remove browser bullets */
-  padding: 0;
-  margin: 16px 0 20px;
-}
-
-.checklist li {
+/* Checklist (force gold checks everywhere) */
+.photo-section .checklist { list-style: none; padding: 0; margin: 16px 0 0; }
+.photo-section .checklist li {
   position: relative;
-  margin: 0 0 10px;
-  padding-left: 28px;   /* space for the checkmark (mobile & default) */
-  font-size: 16px;
+  padding-left: 30px;
+  margin: 10px 0;
   line-height: 1.6;
 }
-
-.checklist li::before {
-  content: "✔";
+.photo-section .checklist li::before {
+  content: "✓";
   position: absolute;
   left: 0;
-  top: 0;
-  color: #f4c542;       /* gold */
-  font-weight: 700;
+  top: 0.1em;
+  color: #f4c542 !important;   /* gold */
+  font-weight: 800;
 }
 
-/* ──────────────────────────────────────────────
-   Desktop layout + residential flip/fix
-   ────────────────────────────────────────────── */
-
+/* Desktop layout: place image/text side-by-side */
 @media (min-width: 720px) {
   .photo-section {
-    grid-template-columns: 1fr 1fr;
-    gap: 32px;
+    grid-template-columns: 1.3fr 1fr;  /* image a bit larger */
+    gap: 36px;
   }
 
-  /* Flip the residential row (image on the right, text on the left) */
-  .residential-work {
-    direction: rtl;
-  }
-
-  /* Keep the image itself normal reading order inside the flipped row */
-  .residential-work .photo-section__image {
-    direction: ltr;
-  }
-
-  /* When flipped, move the checkmark padding to the other side */
-  .residential-work .checklist li {
-    padding-left: 0;
-    padding-right: 28px;
-  }
-  .residential-work .checklist li::before {
-    left: auto;
-    right: 0;
-  }
+  /* IMPORTANT: remove RTL flip; use ordering instead */
+  .residential-work .photo-section__image { order: 2; }
+  .residential-work .photo-section__text  { order: 1; }
 }
+
+/* ---- REMOVE old flip if you still have it ----
+.residential-work { direction: rtl; }
+.residential-work .photo-section__image { direction: ltr; }
+*/
