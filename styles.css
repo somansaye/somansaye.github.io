@@ -407,3 +407,60 @@ body{font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Robo
 .photo-section .checklist li::before {
   color: #f4c542 !important;
 }
+/* === Unified layout overrides (mobile-first) === */
+.photo-section__text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;      /* center inside the text column */
+  text-align: center;       /* center headings + paragraph */
+  max-width: 680px;         /* nice readable width */
+  margin: 0 auto;
+}
+
+/* checklist: keep gold checks and align with text */
+.photo-section .checklist {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0;
+}
+.photo-section .checklist li {
+  position: relative;
+  padding-left: 28px;       /* room for check */
+  margin: 10px 0;
+  line-height: 1.6;
+}
+.photo-section .checklist li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0.1em;
+  color: #f4c542;           /* gold */
+  font-weight: 800;
+}
+
+/* button sits centered under the list */
+.photo-section__text .btn {
+  align-self: center;
+  margin: 16px auto 0;
+}
+
+/* === Desktop tweaks === */
+@media (min-width: 900px) {
+  .photo-section {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+
+  /* Keep residential image on the right, text on the left,
+     but keep the text block centered internally */
+  .residential-work .photo-section__image { grid-column: 2; }
+  .residential-work .photo-section__text  {
+    grid-column: 1;
+    align-items: center;    /* center content within the text column */
+    text-align: center;
+    padding-left: 0;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+}
