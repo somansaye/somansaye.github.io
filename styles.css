@@ -208,65 +208,61 @@ body{font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Robo
     direction: ltr; /* keep image left-to-right inside that block */
   }
 }
-/* ===== Service highlight blocks (Automotive + Residential) ===== */
+/* Highlight service sections (Automotive + Residential) */
 .service-highlight {
-  background: #1a1a2e;          /* same dark panel as FAQs */
+  background: #1a1a2e;   /* lock to FAQ background */
   border-radius: 12px;
   padding: 40px;
-  margin: 40px 0;
-}
-
-/* Two-column layout */
-.service-highlight .container {
-  display: grid;
-  grid-template-columns: 1.1fr 1fr;  /* image | text */
-  gap: 32px;
+  margin: 40px 0;        /* spacing above and below */
+  display: flex;
   align-items: center;
+  gap: 40px;
 }
 
-/* Flip columns for the residential block WITHOUT RTL */
-#services-residential .container {
-  grid-template-columns: 1fr 1.1fr;  /* text | image (image on right) */
-}
-
-/* Images */
-.service-highlight .image img {
-  width: 100%;
+/* Images inside */
+.service-highlight img {
+  border-radius: 8px;
+  max-width: 100%;
   height: auto;
-  border-radius: 10px;
+  flex: 1;
   object-fit: cover;
 }
 
-/* Text column */
+/* Content block */
 .service-highlight .content {
-  align-self: center;
+  flex: 2;
+  color: #fff;   /* ensure text is visible */
 }
 
-/* Checklist */
+/* Checklist styling */
 .checklist {
   list-style: none;
   padding: 0;
-  margin: 16px 0 24px;
-}
-.checklist li {
-  position: relative;
-  padding-left: 28px;           /* space for the tick */
-  margin-bottom: 12px;
-  line-height: 1.6;
-  color: #ddd;
-}
-.checklist li::before {
-  content: "✔";
-  position: absolute;
-  left: 0;                      /* now relative to the text column */
-  top: 0;
-  color: #f4c542;               /* gold tick */
-  font-weight: 700;
+  margin: 20px 0;
 }
 
-/* Responsive: stack on small screens */
-@media (max-width: 900px) {
-  .service-highlight .container {
-    grid-template-columns: 1fr;  /* stack */
-  }
+.checklist li {
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 12px;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Gold checkmarks */
+.checklist li:before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  color: gold;
+  font-weight: bold;
+}
+
+/* Fix residential layout (mirror without breaking checks) */
+#services-residential {
+  flex-direction: row-reverse;  /* image on the right */
+}
+
+#services-residential .content {
+  text-align: left;  /* keep checklist aligned under heading */
 }
