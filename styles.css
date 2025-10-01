@@ -325,3 +325,18 @@ body{font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Robo
   align-self: center;        /* button centered under the text */
   margin-top: 16px;
 }
+/* Align Call Now button with checklist text on all sizes */
+:root { --check-indent: 30px; }               /* same indent as checklist */
+
+.photo-section .checklist li {                 /* already present, kept in sync */
+  padding-left: var(--check-indent);
+}
+
+.photo-section__text .btn {                    /* the button under the list */
+  margin: 14px 0 0 var(--check-indent);        /* top, right, bottom, left */
+}
+
+/* Slightly larger indent on wider screens */
+@media (min-width: 900px) {
+  :root { --check-indent: 36px; }
+}
