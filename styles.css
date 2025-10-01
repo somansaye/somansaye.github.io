@@ -166,3 +166,45 @@ body{font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Robo
   padding: 24px;
   margin-top: 20px;
 }
+.photo-section {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  align-items: center;
+  margin: 48px 0;
+}
+
+.photo-section__image img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.photo-section__text h2 {
+  margin-top: 0;
+  color: var(--text-light);
+}
+
+.photo-section__text p {
+  margin: 16px 0;
+  line-height: 1.5;
+}
+
+.photo-section .btn.secondary {
+  /* style link button similar to others but maybe softer color */
+}
+
+/* For larger screens: image + text side by side */
+@media (min-width: 720px) {
+  .photo-section {
+    grid-template-columns: 1fr 1fr;
+  }
+  /* Maybe flip alternate ones for visual variety */
+  .residential-work {
+    direction: rtl;
+  }
+  .residential-work .photo-section__image {
+    direction: ltr; /* keep image left-to-right inside that block */
+  }
+}
