@@ -296,3 +296,23 @@ body{font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Robo
     padding-left: 20px; /* make checkmarks align nicely */
   }
 }
+/* --- Desktop fix specifically for the Residential block --- */
+@media (min-width: 720px) {
+  .residential-work {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 40px;                     /* spacing between text and image */
+  }
+
+  .residential-work .photo-section__image {
+    grid-column: 2;                /* image on the right */
+  }
+
+  .residential-work .photo-section__text {
+    grid-column: 1;                /* text on the left */
+    text-align: left;
+    padding-left: 32px;            /* push away from left edge */
+    max-width: 560px;              /* keep readable width */
+  }
+}
