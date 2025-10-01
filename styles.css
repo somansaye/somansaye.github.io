@@ -268,3 +268,31 @@ body{font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Robo
     text-align: left;
   }
 }
+/* ✅ Desktop fix: keep residential image on right, text on left */
+@media (min-width: 720px) {
+  .residential-work {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 40px; /* spacing between image and text */
+  }
+  .residential-work .photo-section__image {
+    order: 2; /* image on the right */
+    flex: 1;
+  }
+  .residential-work .photo-section__text {
+    order: 1; /* text on the left */
+    flex: 1;
+    text-align: left;
+  }
+}
+
+/* ✅ Mobile polish: push text/checks in a bit so they don’t touch the edges */
+@media (max-width: 719px) {
+  .photo-section__text {
+    padding: 0 16px; /* add left/right breathing room */
+  }
+  .photo-section .checklist {
+    padding-left: 20px; /* make checkmarks align nicely */
+  }
+}
