@@ -208,63 +208,71 @@ body{font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Robo
     direction: ltr; /* keep image left-to-right inside that block */
   }
 }
-/* Highlight service sections (Automotive + Residential) */
-.service-highlight{
-  background:#1a1a2e;      /* same dark as FAQ */
-  border-radius:12px;
-  padding:40px;
-  margin:40px 0;
+/* ===== Service Sections (Automotive + Residential) ===== */
+.photo-section {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  align-items: center;
+  margin: 48px 0;
+  background: #1a1a2e;   /* matches FAQ background */
+  padding: 40px;
+  border-radius: 12px;
 }
 
-/* Make the inner wrapper the flex row */
-.service-highlight .container.grid-2{
-  display:flex;
-  align-items:center;
-  gap:40px;
+.photo-section__image img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  object-fit: cover;
 }
 
-/* Even split image/text (tweak if you prefer 1/2 + 1/2 or 1/3 + 2/3) */
-.service-highlight .image{ flex:1; }
-.service-highlight .content{ flex:1; }
-
-/* Image presentation */
-.service-highlight img{
-  width:100%;
-  height:auto;
-  display:block;
-  border-radius:8px;
+.photo-section__text h2 {
+  margin-top: 0;
+  color: var(--text-light);
 }
 
-/* Alternate the second block (Residential) so image is on the right */
-#services-residential .container.grid-2{
-  flex-direction:row-reverse;
+.photo-section__text p {
+  margin: 16px 0;
+  line-height: 1.5;
+  color: var(--text-light);
 }
 
-/* Checklist styling (yours, kept the same) */
-.checklist{ list-style:none; padding:0; margin:20px 0; }
-.checklist li{
-  position:relative;
-  padding-left:30px;
-  margin-bottom:12px;
-  font-size:16px;
-  line-height:1.6;
-}
-.checklist li:before{
-  content:"✓";
-  position:absolute;
-  left:0;
-  color:gold;          /* gold checkmarks */
-  font-weight:bold;
+/* Checklist styling */
+.checklist {
+  list-style: none;
+  margin: 20px 0;
+  padding: 0;
 }
 
-/* Mobile: stack image above text */
-@media (max-width: 900px){
-  .service-highlight .container.grid-2{
-    flex-direction:column;
+.checklist li {
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 12px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--text-light);
+}
+
+.checklist li::before {
+  content: "✔";
+  position: absolute;
+  left: 0;
+  color: gold; /* gold checkmarks */
+  font-weight: bold;
+}
+
+/* For larger screens: image + text side by side */
+@media (min-width: 720px) {
+  .photo-section {
+    grid-template-columns: 1fr 1fr;
   }
-  .service-highlight .image,
-  .service-highlight .content{
-    flex:none;
-    width:100%;
+
+  /* Flip layout for residential */
+  .residential-work {
+    direction: rtl;
+  }
+  .residential-work .photo-section__image {
+    direction: ltr; /* keep image correct inside flipped container */
   }
 }
