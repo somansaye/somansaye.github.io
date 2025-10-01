@@ -208,71 +208,65 @@ body{font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Robo
     direction: ltr; /* keep image left-to-right inside that block */
   }
 }
-/* ===== Service Sections (Automotive + Residential) ===== */
-.photo-section {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 24px;
-  align-items: center;
-  margin: 48px 0;
-  background: #1a1a2e;   /* matches FAQ background */
-  padding: 40px;
+/* ===== Service highlight blocks (Automotive + Residential) ===== */
+.service-highlight {
+  background: #1a1a2e;          /* same dark panel as FAQs */
   border-radius: 12px;
+  padding: 40px;
+  margin: 40px 0;
 }
 
-.photo-section__image img {
+/* Two-column layout */
+.service-highlight .container {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;  /* image | text */
+  gap: 32px;
+  align-items: center;
+}
+
+/* Flip columns for the residential block WITHOUT RTL */
+#services-residential .container {
+  grid-template-columns: 1fr 1.1fr;  /* text | image (image on right) */
+}
+
+/* Images */
+.service-highlight .image img {
   width: 100%;
   height: auto;
   border-radius: 10px;
   object-fit: cover;
 }
 
-.photo-section__text h2 {
-  margin-top: 0;
-  color: var(--text-light);
+/* Text column */
+.service-highlight .content {
+  align-self: center;
 }
 
-.photo-section__text p {
-  margin: 16px 0;
-  line-height: 1.5;
-  color: var(--text-light);
-}
-
-/* Checklist styling */
+/* Checklist */
 .checklist {
   list-style: none;
-  margin: 20px 0;
   padding: 0;
+  margin: 16px 0 24px;
 }
-
 .checklist li {
   position: relative;
-  padding-left: 30px;
+  padding-left: 28px;           /* space for the tick */
   margin-bottom: 12px;
-  font-size: 16px;
   line-height: 1.6;
-  color: var(--text-light);
+  color: #ddd;
 }
-
 .checklist li::before {
   content: "✔";
   position: absolute;
-  left: 0;
-  color: gold; /* gold checkmarks */
-  font-weight: bold;
+  left: 0;                      /* now relative to the text column */
+  top: 0;
+  color: #f4c542;               /* gold tick */
+  font-weight: 700;
 }
 
-/* For larger screens: image + text side by side */
-@media (min-width: 720px) {
-  .photo-section {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  /* Flip layout for residential */
-  .residential-work {
-    direction: rtl;
-  }
-  .residential-work .photo-section__image {
-    direction: ltr; /* keep image correct inside flipped container */
+/* Responsive: stack on small screens */
+@media (max-width: 900px) {
+  .service-highlight .container {
+    grid-template-columns: 1fr;  /* stack */
   }
 }
