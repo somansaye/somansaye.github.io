@@ -353,3 +353,29 @@ body{font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Robo
   max-width: 560px;       /* keep it from going too wide */
   margin: 0 auto;         /* centers the whole block in its column */
 }
+/* --- Text/bullets/button alignment refinements --- */
+.photo-section__text {
+  /* keep the column left-aligned so list can sit flush left */
+  align-items: flex-start;
+}
+
+/* center only the heading + paragraph */
+.photo-section__text h2,
+.photo-section__text p {
+  text-align: center;
+  align-self: center;   /* center within the text column */
+  width: 100%;
+}
+
+/* bullets stay left and keep the gold check spacing */
+.photo-section__text .checklist {
+  align-self: flex-start;         /* keep the list on the left */
+  padding-left: var(--check-indent, 30px);
+  margin: 0;
+}
+
+/* center the Call Now button under the text/bullets */
+.photo-section__text .btn {
+  align-self: center;
+  margin: 16px auto 0;
+}
