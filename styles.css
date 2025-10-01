@@ -196,20 +196,7 @@ body{font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Robo
 }
 
 /* For larger screens: image + text side by side */
-@media (min-width: 720px) {
-  .photo-section {
-    grid-template-columns: 1fr 1fr;
-  }
-  /* Maybe flip alternate ones for visual variety */
-  .residential-work {
-    direction: rtl;
-  }
-  .residential-work .photo-section__image {
-    direction: ltr; /* keep image left-to-right inside that block */
-  }
-}
 /* --- Photo + text sections (Automotive & Residential) --- */
-
 .photo-section {
   display: grid;
   grid-template-columns: 1fr;
@@ -218,6 +205,7 @@ body{font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Robo
   margin: 48px 0;
 }
 
+/* image */
 .photo-section__image img {
   width: 100%;
   height: auto;
@@ -225,12 +213,22 @@ body{font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Robo
   object-fit: cover;
 }
 
-/* Text */
-.photo-section__text h2 { margin: 0 0 12px; }
-.photo-section__text p  { margin: 0 0 16px; line-height: 1.6; }
+/* text */
+.photo-section__text h2 {
+  margin-top: 0;
+  color: var(--text-light);
+}
+.photo-section__text p {
+  margin: 16px 0;
+  line-height: 1.5;
+}
 
-/* Checklist (force gold checks everywhere) */
-.photo-section .checklist { list-style: none; padding: 0; margin: 16px 0 0; }
+/* checklist (gold checks on all viewports) */
+.photo-section .checklist {
+  list-style: none;
+  padding: 0;
+  margin: 16px 0 0 0;
+}
 .photo-section .checklist li {
   position: relative;
   padding-left: 30px;
@@ -242,23 +240,31 @@ body{font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Robo
   position: absolute;
   left: 0;
   top: 0.1em;
-  color: #f4c542 !important;   /* gold */
+  color: #f4c542 !important; /* gold */
   font-weight: 800;
 }
 
-/* Desktop layout: place image/text side-by-side */
+/* Desktop layout: image + text side-by-side */
 @media (min-width: 720px) {
+  /* default two columns (Automotive, etc.) */
   .photo-section {
-    grid-template-columns: 1.3fr 1fr;  /* image a bit larger */
+    grid-template-columns: 1.3fr 1fr; /* image a bit larger */
     gap: 36px;
   }
 
-  /* IMPORTANT: remove RTL flip; use ordering instead */
-  .residential-work .photo-section__image { order: 2; }
-  .residential-work .photo-section__text  { order: 1; }
+  /* Residential: keep LTR text but move image to the right on desktop */
+  .residential-work {
+    display: flex;               /* override grid for this one section */
+    align-items: center;
+    gap: 40px;
+  }
+  .residential-work .photo-section__image {
+    order: 2;                    /* image on the right */
+    flex: 1;
+  }
+  .residential-work .photo-section__text {
+    order: 1;                    /* text on the left */
+    flex: 1;
+    text-align: left;
+  }
 }
-
-/* ---- REMOVE old flip if you still have it ----
-.residential-work { direction: rtl; }
-.residential-work .photo-section__image { direction: ltr; }
-*/
