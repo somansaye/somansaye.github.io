@@ -58,12 +58,17 @@ function initContactForm() {
       }
 
       form.classList.add('is-submitted');
+      status.classList.remove('is-fading');
       status.hidden = false;
       form.reset();
       window.setTimeout(() => {
+        status.classList.add('is-fading');
+      }, 2400);
+      window.setTimeout(() => {
         form.classList.remove('is-submitted');
+        status.classList.remove('is-fading');
         status.hidden = true;
-      }, 3500);
+      }, 3000);
     } catch (error) {
       window.alert('There was a problem submitting the form. Please call or email us directly.');
     } finally {
