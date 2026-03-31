@@ -19,7 +19,7 @@ section[id]{scroll-margin-top:128px}
 .btn{display:inline-block;padding:10px 14px;border:1px solid #2b3450;border-radius:10px;color:var(--ink);text-decoration:none}
 .btn.primary{background:var(--brand-amber);color:#2b1b00;border-color:transparent;font-weight:700;box-shadow:0 0 0 0 rgba(255,195,77,.0)}
 .btn.primary:hover{background:#e0a92f;color:#2b1b00;box-shadow:0 0 0 4px rgba(255,195,77,.15)}
-.hero{padding:90px 0;position:relative;background:url('assets/hero.jpg') center/cover no-repeat}
+.hero{padding:118px 0 90px;position:relative;background:url('assets/hero.jpg') center/cover no-repeat}
 .hero::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(0,0,0,.55))}
 .hero-grid{position:relative;z-index:1;display:grid;gap:24px}
 .hero-copy h1{font-size:clamp(28px,4vw,48px);line-height:1.1;margin:0 0 12px}
@@ -208,6 +208,7 @@ section[id]{scroll-margin-top:128px}
   .header{ padding:10px 14px; }
   .brand-logo{width:52px;height:52px}
   .brand span{ font-size:16px; }
+  .hero{padding:102px 0 82px}
   section[id]{scroll-margin-top:90px}
 }
 .residential-card {
