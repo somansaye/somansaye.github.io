@@ -95,7 +95,9 @@ function initAnchorScroll() {
     const target = document.querySelector(hash);
     if (!target) return;
     const headerHeight = header.getBoundingClientRect().height;
-    const top = target.getBoundingClientRect().top + window.scrollY - headerHeight - 16;
+    const targetStyles = window.getComputedStyle(target);
+    const targetPaddingTop = Number.parseFloat(targetStyles.paddingTop) || 0;
+    const top = target.getBoundingClientRect().top + window.scrollY - headerHeight + targetPaddingTop - 8;
     window.scrollTo({
       top: Math.max(0, top),
       behavior: 'smooth',
