@@ -96,9 +96,11 @@ function initMobileCallBar() {
 
   const mobileQuery = window.matchMedia('(max-width: 720px)');
   let heroPassed = false;
-  let contactVisible = false;
 
   const render = () => {
+    const contactRect = contact.getBoundingClientRect();
+    const contactVisible = contactRect.top < window.innerHeight * 0.8 && contactRect.bottom > 0;
+
     if (!mobileQuery.matches) {
       callBar.classList.remove('is-visible', 'is-hidden');
       if (floatingButton) {
@@ -132,7 +134,6 @@ function initMobileCallBar() {
 
   const contactObserver = new IntersectionObserver(
     ([entry]) => {
-      contactVisible = entry.isIntersecting;
       render();
     },
     { threshold: [0.15] }
@@ -141,6 +142,8 @@ function initMobileCallBar() {
   heroObserver.observe(hero);
   contactObserver.observe(contact);
   mobileQuery.addEventListener('change', render);
+  window.addEventListener('scroll', render, { passive: true });
+  window.addEventListener('resize', render);
   render();
 }
 
