@@ -92,11 +92,17 @@ function initAnchorScroll() {
   const menuButton = document.querySelector('.hamburger');
   if (!header) return;
 
+  const getAnchorTarget = (target) => {
+    if (!target) return null;
+    return target.querySelector(':scope > .container') || target.querySelector('.container') || target;
+  };
+
   const scrollToHash = (hash) => {
     const target = document.querySelector(hash);
     if (!target) return;
     const headerHeight = header.getBoundingClientRect().height;
-    const top = target.getBoundingClientRect().top + window.scrollY - headerHeight;
+    const anchorTarget = getAnchorTarget(target);
+    const top = anchorTarget.getBoundingClientRect().top + window.scrollY - headerHeight;
     window.scrollTo({
       top: Math.max(0, top),
       behavior: 'smooth',
