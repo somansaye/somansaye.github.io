@@ -38,17 +38,15 @@ function initContactForm() {
   const status = document.getElementById('form-status');
   if (!form || !submitButton || !status || form.dataset.enhanced === 'true') return;
   form.dataset.enhanced = 'true';
-  const fields = form.querySelector('.form-fields');
   const firstInput = form.querySelector('input, textarea');
-  let resetTimer = null;
+  let successTimer = null;
 
   const resetFormState = () => {
-    if (resetTimer) {
-      window.clearTimeout(resetTimer);
-      resetTimer = null;
+    if (successTimer) {
+      window.clearTimeout(successTimer);
+      successTimer = null;
     }
     form.classList.remove('is-submitted');
-    status.classList.remove('is-fading');
     status.hidden = true;
     submitButton.disabled = false;
     if (firstInput) firstInput.focus();
@@ -75,17 +73,14 @@ function initContactForm() {
       }
 
       form.classList.add('is-submitted');
-      status.classList.remove('is-fading');
       status.hidden = false;
       form.reset();
-      window.setTimeout(() => {
-        status.classList.add('is-fading');
-      }, 1800);
-      resetTimer = window.setTimeout(() => {
+      successTimer = window.setTimeout(() => {
         resetFormState();
-      }, 2600);
+      }, 2500);
     } catch (error) {
       window.alert('There was a problem submitting the form. Please call or email us directly.');
+      resetFormState();
     } finally {
       if (!form.classList.contains('is-submitted')) {
         submitButton.disabled = false;
