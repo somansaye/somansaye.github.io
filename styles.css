@@ -7,7 +7,7 @@
 *{box-sizing:border-box} html,body{margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background:var(--bg); color:var(--ink); line-height:1.6}
-section[id]{scroll-margin-top:96px}
+section[id]{scroll-margin-top:128px}
 .container{max-width:1120px;margin:0 auto;padding:0 20px}
 .center{text-align:center}.muted{color:var(--muted)}.tiny{font-size:12px}
 .header{position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:rgba(15,17,21,.85);backdrop-filter:blur(8px);border-bottom:1px solid #161a24}
@@ -208,7 +208,7 @@ section[id]{scroll-margin-top:96px}
   .header{ padding:10px 14px; }
   .brand-logo{width:52px;height:52px}
   .brand span{ font-size:16px; }
-  section[id]{scroll-margin-top:82px}
+  section[id]{scroll-margin-top:90px}
 }
 .residential-card {
   grid-column: 1 / -1;         /* full width */
