@@ -36,21 +36,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('contact-form');
   const popup = document.getElementById('form-popup');
   const closeBtn = document.getElementById('form-popup-close');
-  if (!form || !popup || !closeBtn) return;
+  const submitButton = document.getElementById('contact-form-submit');
+  if (!form || !popup || !closeBtn || !submitButton) return;
 
   const closePopup = () => {
     popup.hidden = true;
   };
 
-  closeBtn.addEventListener('click', closePopup);
-  popup.addEventListener('click', (event) => {
-    if (event.target === popup) closePopup();
-  });
-
-  form.addEventListener('submit', async (event) => {
-    event.preventDefault();
-    const submitButton = form.querySelector('button[type="submit"]');
-    if (submitButton) submitButton.disabled = true;
+  const submitForm = async () => {
+    if (!form.reportValidity()) return;
+    submitButton.disabled = true;
 
     try {
       const response = await fetch(form.action, {
@@ -70,7 +65,19 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (error) {
       window.alert('There was a problem submitting the form. Please call or email us directly.');
     } finally {
-      if (submitButton) submitButton.disabled = false;
+      submitButton.disabled = false;
     }
+  };
+
+  closeBtn.addEventListener('click', closePopup);
+  popup.addEventListener('click', (event) => {
+    if (event.target === popup) closePopup();
   });
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    submitForm();
+  });
+
+  submitButton.addEventListener('click', submitForm);
 });
