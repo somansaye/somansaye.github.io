@@ -50,7 +50,7 @@ body{font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Robo
 @media(min-width:720px){.cards-2{grid-template-columns:repeat(2,1fr)}.cards-3{grid-template-columns:repeat(3,1fr)}.cards-4{grid-template-columns:repeat(4,1fr)}}
 .card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;box-shadow:0 0 0 rgba(0,0,0,0)}
 .card:hover{box-shadow:var(--shadow)}
-.service .icon{width:40px;height:40px;border-radius:10px;background:#0f1524;border:1px solid #222a40;margin-bottom:10px;position:relative}
+.service .icon{width:40px;height:40px;border-radius:10px;background:linear-gradient(180deg,#101727,#0c111c);border:1px solid rgba(255,195,77,.34);box-shadow:0 0 0 3px rgba(255,195,77,.08),0 10px 20px rgba(0,0,0,.16);margin-bottom:10px;position:relative}
 .icon::before{content:"";position:absolute;inset:0;display:block;background:url('assets/icon-key.svg') center/24px no-repeat}
 .icon-lock::before{background-image:url('assets/icon-lock.svg')}
 .icon-car::before{background-image:url('assets/icon-car.svg')}
