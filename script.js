@@ -102,7 +102,7 @@ function initAnchorScroll() {
     if (!target) return;
     const headerHeight = header.getBoundingClientRect().height;
     const anchorTarget = getAnchorTarget(target);
-    const extraOffset = window.matchMedia('(max-width: 720px)').matches ? 20 : 8;
+    const extraOffset = window.matchMedia('(max-width: 720px)').matches ? 20 : 0;
     const top = anchorTarget.getBoundingClientRect().top + window.scrollY - headerHeight - extraOffset;
     window.scrollTo({
       top: Math.max(0, top),
