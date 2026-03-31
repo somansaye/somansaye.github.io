@@ -95,35 +95,35 @@ function initMobileCallBar() {
   if (!callBar || !hero || !contact) return;
 
   const mobileQuery = window.matchMedia('(max-width: 720px)');
-  let hasEntered = false;
 
   const updateBar = () => {
     const contactTop = contact.offsetTop - 140;
     const contactReached = window.scrollY >= contactTop;
+    const heroRect = hero.getBoundingClientRect();
+    const triggerPoint = heroRect.height * 0.45;
+    const pastHero = heroRect.bottom <= triggerPoint;
 
     if (!mobileQuery.matches) {
       callBar.classList.remove('is-visible', 'is-hidden');
-      hasEntered = false;
       if (floatingButton) {
         floatingButton.classList.toggle('is-hidden', contactReached);
       }
       return;
     }
 
-    const heroRect = hero.getBoundingClientRect();
-    const triggerPoint = heroRect.height * 0.45;
+    if (floatingButton) {
+      floatingButton.classList.add('is-hidden');
+    }
+
     if (contactReached) {
       callBar.classList.remove('is-visible');
       callBar.classList.add('is-hidden');
-      hasEntered = true;
-    } else if (heroRect.bottom <= triggerPoint && !hasEntered) {
-      hasEntered = true;
+    } else if (pastHero) {
       callBar.classList.remove('is-hidden');
       callBar.classList.add('is-visible');
-    } else if (heroRect.bottom > triggerPoint) {
+    } else {
       callBar.classList.remove('is-visible');
       callBar.classList.remove('is-hidden');
-      hasEntered = false;
     }
   };
 
