@@ -92,18 +92,11 @@ function initAnchorScroll() {
   const menuButton = document.querySelector('.hamburger');
   if (!header) return;
 
-  const getAnchorTarget = (target) => {
-    if (!target) return null;
-    return target.querySelector('h1, h2, h3, .eyebrow, .container > *') || target;
-  };
-
   const scrollToHash = (hash) => {
     const target = document.querySelector(hash);
     if (!target) return;
     const headerHeight = header.getBoundingClientRect().height;
-    const anchorTarget = getAnchorTarget(target);
-    const extraOffset = window.matchMedia('(max-width: 720px)').matches ? 20 : 0;
-    const top = anchorTarget.getBoundingClientRect().top + window.scrollY - headerHeight - extraOffset;
+    const top = target.getBoundingClientRect().top + window.scrollY - headerHeight;
     window.scrollTo({
       top: Math.max(0, top),
       behavior: 'smooth',
