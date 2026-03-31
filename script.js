@@ -95,18 +95,14 @@ function initMobileCallBar() {
   if (!callBar || !hero || !contact) return;
 
   const mobileQuery = window.matchMedia('(max-width: 720px)');
+  let heroPassed = false;
+  let contactVisible = false;
 
-  const updateBar = () => {
-    const contactTop = contact.offsetTop - 140;
-    const contactReached = window.scrollY >= contactTop;
-    const heroRect = hero.getBoundingClientRect();
-    const triggerPoint = heroRect.height * 0.45;
-    const pastHero = heroRect.bottom <= triggerPoint;
-
+  const render = () => {
     if (!mobileQuery.matches) {
       callBar.classList.remove('is-visible', 'is-hidden');
       if (floatingButton) {
-        floatingButton.classList.toggle('is-hidden', contactReached);
+        floatingButton.classList.toggle('is-hidden', contactVisible);
       }
       return;
     }
@@ -115,21 +111,37 @@ function initMobileCallBar() {
       floatingButton.classList.add('is-hidden');
     }
 
-    if (contactReached) {
+    if (contactVisible) {
       callBar.classList.remove('is-visible');
       callBar.classList.add('is-hidden');
-    } else if (pastHero) {
+    } else if (heroPassed) {
       callBar.classList.remove('is-hidden');
       callBar.classList.add('is-visible');
     } else {
-      callBar.classList.remove('is-visible');
-      callBar.classList.remove('is-hidden');
+      callBar.classList.remove('is-visible', 'is-hidden');
     }
   };
 
-  updateBar();
-  window.addEventListener('scroll', updateBar, { passive: true });
-  window.addEventListener('resize', updateBar);
+  const heroObserver = new IntersectionObserver(
+    ([entry]) => {
+      heroPassed = !entry.isIntersecting || entry.intersectionRatio < 0.45;
+      render();
+    },
+    { threshold: [0.45] }
+  );
+
+  const contactObserver = new IntersectionObserver(
+    ([entry]) => {
+      contactVisible = entry.isIntersecting;
+      render();
+    },
+    { threshold: [0.15] }
+  );
+
+  heroObserver.observe(hero);
+  contactObserver.observe(contact);
+  mobileQuery.addEventListener('change', render);
+  render();
 }
 
 if (document.readyState === 'loading') {
