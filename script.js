@@ -115,6 +115,21 @@ function initAnchorScroll() {
   });
 }
 
+function initTopReset() {
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+  }
+
+  const resetToTop = () => {
+    if (!window.location.hash || window.location.hash === '#top') {
+      window.scrollTo(0, 0);
+    }
+  };
+
+  window.addEventListener('pageshow', resetToTop);
+  resetToTop();
+}
+
 function initMobileCallBar() {
   const callBar = document.querySelector('.call-bar');
   const floatingButton = document.querySelector('.call-button');
@@ -180,11 +195,13 @@ if (document.readyState === 'loading') {
     initMobileMenu();
     initContactForm();
     initAnchorScroll();
+    initTopReset();
     initMobileCallBar();
   });
 } else {
   initMobileMenu();
   initContactForm();
   initAnchorScroll();
+  initTopReset();
   initMobileCallBar();
 }
