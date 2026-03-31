@@ -252,26 +252,24 @@
             <li><strong>Service area:</strong> Alexandria, Arlington, Fairfax County, Falls Church, Springfield, Woodbridge, Fairfax VA, and surrounding DMV areas</li>
           </ul>
         </div>
-        <form class="card form" id="contact-form" action="https://formspree.io/f/mwvwbepn" method="POST" novalidate>
-          <input type="hidden" name="_subject" value="New Beacon Locksmith website inquiry">
-          <label> Name <input type="text" name="name" required></label>
-          <label> Email <input type="email" name="email" required></label>
-          <label> Phone <input type="tel" name="phone" placeholder="Optional"></label>
-          <label> Message <textarea name="message" rows="6" placeholder="Tell us your year/make/model, location, or locksmith need. Add as much detail as possible." required></textarea></label>
-          <button class="btn primary" type="button" id="contact-form-submit">Send</button>
-          <p class="tiny muted">Prefer calling or texting? Use the phone number above for the fastest response. Form submissions now go directly to our inbox.</p>
+        <form class="card form" id="contact-form" action="https://formspree.io/f/mwvwbepn" method="POST">
+          <div class="form-fields">
+            <input type="hidden" name="_subject" value="New Beacon Locksmith website inquiry">
+            <label> Name <input type="text" name="name" required></label>
+            <label> Email <input type="email" name="email" required></label>
+            <label> Phone <input type="tel" name="phone" placeholder="Optional"></label>
+            <label> Message <textarea name="message" rows="6" placeholder="Tell us your year/make/model, location, or locksmith need. Add as much detail as possible." required></textarea></label>
+            <button class="btn primary" type="submit" id="contact-form-submit">Send</button>
+            <p class="tiny muted">Prefer calling or texting? Use the phone number above for the fastest response. Form submissions now go directly to our inbox.</p>
+          </div>
+          <div class="form-status" id="form-status" hidden aria-live="polite">
+            <h3>Thanks!</h3>
+            <p>The form was submitted successfully.</p>
+          </div>
         </form>
       </div>
     </section>
   </main>
-
-  <div class="form-popup" id="form-popup" hidden>
-    <div class="form-popup__card" role="alertdialog" aria-labelledby="form-popup-title" aria-describedby="form-popup-message" aria-modal="true">
-      <h3 id="form-popup-title">Thanks!</h3>
-      <p id="form-popup-message">The form was submitted successfully.</p>
-      <button class="btn" type="button" id="form-popup-close">Close</button>
-    </div>
-  </div>
 
   <footer class="footer">
     <div class="container footer-grid">

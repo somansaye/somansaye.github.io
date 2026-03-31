@@ -1,5 +1,5 @@
 // Mobile menu toggle
-document.addEventListener('DOMContentLoaded', () => {
+function initMobileMenu() {
   const btn  = document.querySelector('.hamburger');
   const menu = document.getElementById('mobile-menu');
   if (!btn || !menu) return;
@@ -30,20 +30,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const inside = e.target.closest('.nav') || e.target.closest('.hamburger');
     if (!inside) openMenu(false);
   });
-});
+}
 
-document.addEventListener('DOMContentLoaded', () => {
+function initContactForm() {
   const form = document.getElementById('contact-form');
-  const popup = document.getElementById('form-popup');
-  const closeBtn = document.getElementById('form-popup-close');
   const submitButton = document.getElementById('contact-form-submit');
-  if (!form || !popup || !closeBtn || !submitButton) return;
+  const status = document.getElementById('form-status');
+  if (!form || !submitButton || !status || form.dataset.enhanced === 'true') return;
+  form.dataset.enhanced = 'true';
 
-  const closePopup = () => {
-    popup.hidden = true;
-  };
-
-  const submitForm = async () => {
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
     if (!form.reportValidity()) return;
     submitButton.disabled = true;
 
@@ -60,24 +57,27 @@ document.addEventListener('DOMContentLoaded', () => {
         throw new Error('Submission failed');
       }
 
+      form.classList.add('is-submitted');
+      status.hidden = false;
       form.reset();
-      popup.hidden = false;
+      window.setTimeout(() => {
+        form.classList.remove('is-submitted');
+        status.hidden = true;
+      }, 3500);
     } catch (error) {
       window.alert('There was a problem submitting the form. Please call or email us directly.');
     } finally {
       submitButton.disabled = false;
     }
-  };
-
-  closeBtn.addEventListener('click', closePopup);
-  popup.addEventListener('click', (event) => {
-    if (event.target === popup) closePopup();
   });
+}
 
-  form.addEventListener('submit', (event) => {
-    event.preventDefault();
-    submitForm();
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => {
+    initMobileMenu();
+    initContactForm();
   });
-
-  submitButton.addEventListener('click', submitForm);
-});
+} else {
+  initMobileMenu();
+  initContactForm();
+}
