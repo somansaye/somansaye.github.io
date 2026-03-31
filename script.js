@@ -87,6 +87,34 @@ function initContactForm() {
   submitButton.addEventListener('click', submitForm);
 }
 
+function initAnchorScroll() {
+  const header = document.querySelector('.header');
+  if (!header) return;
+
+  const scrollToHash = (hash) => {
+    const target = document.querySelector(hash);
+    if (!target) return;
+    const headerHeight = header.getBoundingClientRect().height;
+    const top = target.getBoundingClientRect().top + window.scrollY - headerHeight - 16;
+    window.scrollTo({
+      top: Math.max(0, top),
+      behavior: 'smooth',
+    });
+  };
+
+  document.querySelectorAll('a[href^="#"]').forEach((link) => {
+    link.addEventListener('click', (event) => {
+      const hash = link.getAttribute('href');
+      if (!hash || hash === '#') return;
+      const target = document.querySelector(hash);
+      if (!target) return;
+      event.preventDefault();
+      history.replaceState(null, '', hash);
+      scrollToHash(hash);
+    });
+  });
+}
+
 function initMobileCallBar() {
   const callBar = document.querySelector('.call-bar');
   const floatingButton = document.querySelector('.call-button');
@@ -151,10 +179,12 @@ if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
     initMobileMenu();
     initContactForm();
+    initAnchorScroll();
     initMobileCallBar();
   });
 } else {
   initMobileMenu();
   initContactForm();
+  initAnchorScroll();
   initMobileCallBar();
 }
