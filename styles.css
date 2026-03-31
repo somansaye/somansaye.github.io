@@ -216,6 +216,9 @@ body{font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Robo
   padding: 24px;
   margin-top: 20px;
 }
+@media(min-width:720px){
+  .dealership-card-service{grid-column:1 / -1}
+}
 .photo-section {
   display: grid;
   grid-template-columns: 1fr;
