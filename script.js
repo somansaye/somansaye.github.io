@@ -37,10 +37,17 @@ function initContactForm() {
   const submitButton = document.getElementById('contact-form-submit');
   if (!form || !submitButton || form.dataset.enhanced === 'true') return;
   form.dataset.enhanced = 'true';
-  const originalMarkup = form.innerHTML;
+  const defaultButtonText = submitButton.textContent;
 
-  form.addEventListener('submit', async (event) => {
-    event.preventDefault();
+  const resetForm = () => {
+    form.classList.remove('is-success');
+    form.reset();
+    submitButton.disabled = false;
+    submitButton.classList.remove('is-success');
+    submitButton.textContent = defaultButtonText;
+  };
+
+  const submitForm = async () => {
     if (!form.reportValidity()) return;
     submitButton.disabled = true;
 
@@ -57,24 +64,23 @@ function initContactForm() {
         throw new Error('Submission failed');
       }
 
-      form.innerHTML = `
-        <div class="form-success" aria-live="polite">
-          <div class="form-success__inner">
-            <h3>Thanks!</h3>
-            <p>The form was submitted successfully.</p>
-          </div>
-        </div>
-      `;
       window.setTimeout(() => {
-        form.innerHTML = originalMarkup;
-        delete form.dataset.enhanced;
-        initContactForm();
-      }, 2500);
+        form.classList.add('is-success');
+        submitButton.classList.add('is-success');
+        submitButton.textContent = 'Thanks! Form submitted successfully.';
+      }, 50);
+      window.setTimeout(resetForm, 2600);
     } catch (error) {
       window.alert('There was a problem submitting the form. Please call or email us directly.');
       submitButton.disabled = false;
     }
+  };
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
   });
+
+  submitButton.addEventListener('click', submitForm);
 }
 
 if (document.readyState === 'loading') {
