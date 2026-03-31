@@ -31,4 +31,46 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!inside) openMenu(false);
   });
 });
-// No JS required; FAQ uses <details> for native toggle.
+
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('contact-form');
+  const popup = document.getElementById('form-popup');
+  const closeBtn = document.getElementById('form-popup-close');
+  if (!form || !popup || !closeBtn) return;
+
+  const closePopup = () => {
+    popup.hidden = true;
+  };
+
+  closeBtn.addEventListener('click', closePopup);
+  popup.addEventListener('click', (event) => {
+    if (event.target === popup) closePopup();
+  });
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const submitButton = form.querySelector('button[type="submit"]');
+    if (submitButton) submitButton.disabled = true;
+
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: {
+          Accept: 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Submission failed');
+      }
+
+      form.reset();
+      popup.hidden = false;
+    } catch (error) {
+      window.alert('There was a problem submitting the form. Please call or email us directly.');
+    } finally {
+      if (submitButton) submitButton.disabled = false;
+    }
+  });
+});

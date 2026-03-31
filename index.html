@@ -252,7 +252,7 @@
             <li><strong>Service area:</strong> Alexandria, Arlington, Fairfax County, Falls Church, Springfield, Woodbridge, Fairfax VA, and surrounding DMV areas</li>
           </ul>
         </div>
-        <form class="card form" action="https://formspree.io/f/mwvwbepn" method="POST">
+        <form class="card form" id="contact-form" action="https://formspree.io/f/mwvwbepn" method="POST">
           <input type="hidden" name="_subject" value="New Beacon Locksmith website inquiry">
           <label> Name <input type="text" name="name" required></label>
           <label> Email <input type="email" name="email" required></label>
@@ -264,6 +264,14 @@
       </div>
     </section>
   </main>
+
+  <div class="form-popup" id="form-popup" hidden>
+    <div class="form-popup__card" role="alertdialog" aria-labelledby="form-popup-title" aria-describedby="form-popup-message" aria-modal="true">
+      <h3 id="form-popup-title">Thanks!</h3>
+      <p id="form-popup-message">The form was submitted successfully.</p>
+      <button class="btn" type="button" id="form-popup-close">Close</button>
+    </div>
+  </div>
 
   <footer class="footer">
     <div class="container footer-grid">
