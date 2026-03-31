@@ -102,11 +102,12 @@ function initMobileCallBar() {
       return;
     }
 
-    const heroBottom = hero.getBoundingClientRect().bottom;
-    if (heroBottom <= 0 && !hasEntered) {
+    const heroRect = hero.getBoundingClientRect();
+    const triggerPoint = heroRect.height * 0.45;
+    if (heroRect.bottom <= triggerPoint && !hasEntered) {
       hasEntered = true;
       callBar.classList.add('is-visible');
-    } else if (heroBottom > 0) {
+    } else if (heroRect.bottom > triggerPoint) {
       callBar.classList.remove('is-visible');
       hasEntered = false;
     }
