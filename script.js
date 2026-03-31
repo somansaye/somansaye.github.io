@@ -35,24 +35,9 @@ function initMobileMenu() {
 function initContactForm() {
   const form = document.getElementById('contact-form');
   const submitButton = document.getElementById('contact-form-submit');
-  const status = document.getElementById('form-status');
-  if (!form || !submitButton || !status || form.dataset.enhanced === 'true') return;
+  if (!form || !submitButton || form.dataset.enhanced === 'true') return;
   form.dataset.enhanced = 'true';
-  const firstInput = form.querySelector('input, textarea');
-  let successTimer = null;
-
-  const resetFormState = () => {
-    if (successTimer) {
-      window.clearTimeout(successTimer);
-      successTimer = null;
-    }
-    form.classList.remove('is-submitted');
-    status.hidden = true;
-    submitButton.disabled = false;
-    if (firstInput) firstInput.focus();
-  };
-
-  resetFormState();
+  const originalMarkup = form.innerHTML;
 
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
@@ -72,19 +57,22 @@ function initContactForm() {
         throw new Error('Submission failed');
       }
 
-      form.classList.add('is-submitted');
-      status.hidden = false;
-      form.reset();
-      successTimer = window.setTimeout(() => {
-        resetFormState();
+      form.innerHTML = `
+        <div class="form-success" aria-live="polite">
+          <div class="form-success__inner">
+            <h3>Thanks!</h3>
+            <p>The form was submitted successfully.</p>
+          </div>
+        </div>
+      `;
+      window.setTimeout(() => {
+        form.innerHTML = originalMarkup;
+        delete form.dataset.enhanced;
+        initContactForm();
       }, 2500);
     } catch (error) {
       window.alert('There was a problem submitting the form. Please call or email us directly.');
-      resetFormState();
-    } finally {
-      if (!form.classList.contains('is-submitted')) {
-        submitButton.disabled = false;
-      }
+      submitButton.disabled = false;
     }
   });
 }
