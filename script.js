@@ -87,12 +87,44 @@ function initContactForm() {
   submitButton.addEventListener('click', submitForm);
 }
 
+function initMobileCallBar() {
+  const callBar = document.querySelector('.call-bar');
+  const hero = document.querySelector('.hero');
+  if (!callBar || !hero) return;
+
+  const mobileQuery = window.matchMedia('(max-width: 720px)');
+  let hasEntered = false;
+
+  const updateBar = () => {
+    if (!mobileQuery.matches) {
+      callBar.classList.remove('is-visible');
+      hasEntered = false;
+      return;
+    }
+
+    const heroBottom = hero.getBoundingClientRect().bottom;
+    if (heroBottom <= 0 && !hasEntered) {
+      hasEntered = true;
+      callBar.classList.add('is-visible');
+    } else if (heroBottom > 0) {
+      callBar.classList.remove('is-visible');
+      hasEntered = false;
+    }
+  };
+
+  updateBar();
+  window.addEventListener('scroll', updateBar, { passive: true });
+  window.addEventListener('resize', updateBar);
+}
+
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
     initMobileMenu();
     initContactForm();
+    initMobileCallBar();
   });
 } else {
   initMobileMenu();
   initContactForm();
+  initMobileCallBar();
 }
