@@ -91,13 +91,17 @@ function initAnchorScroll() {
   const header = document.querySelector('.header');
   if (!header) return;
 
+  const getAnchorTarget = (target) => {
+    if (!target) return null;
+    return target.querySelector('h1, h2, h3, .eyebrow, .container > *') || target;
+  };
+
   const scrollToHash = (hash) => {
     const target = document.querySelector(hash);
     if (!target) return;
     const headerHeight = header.getBoundingClientRect().height;
-    const targetStyles = window.getComputedStyle(target);
-    const targetPaddingTop = Number.parseFloat(targetStyles.paddingTop) || 0;
-    const top = target.getBoundingClientRect().top + window.scrollY - headerHeight + targetPaddingTop - 8;
+    const anchorTarget = getAnchorTarget(target);
+    const top = anchorTarget.getBoundingClientRect().top + window.scrollY - headerHeight - 8;
     window.scrollTo({
       top: Math.max(0, top),
       behavior: 'smooth',
