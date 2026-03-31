@@ -89,26 +89,40 @@ function initContactForm() {
 
 function initMobileCallBar() {
   const callBar = document.querySelector('.call-bar');
+  const floatingButton = document.querySelector('.call-button');
   const hero = document.querySelector('.hero');
-  if (!callBar || !hero) return;
+  const contact = document.querySelector('.contact-section');
+  if (!callBar || !hero || !contact) return;
 
   const mobileQuery = window.matchMedia('(max-width: 720px)');
   let hasEntered = false;
 
   const updateBar = () => {
+    const contactRect = contact.getBoundingClientRect();
+    const contactVisible = contactRect.top < window.innerHeight * 0.75 && contactRect.bottom > 0;
+
     if (!mobileQuery.matches) {
-      callBar.classList.remove('is-visible');
+      callBar.classList.remove('is-visible', 'is-hidden');
       hasEntered = false;
+      if (floatingButton) {
+        floatingButton.classList.toggle('is-hidden', contactVisible);
+      }
       return;
     }
 
     const heroRect = hero.getBoundingClientRect();
     const triggerPoint = heroRect.height * 0.45;
-    if (heroRect.bottom <= triggerPoint && !hasEntered) {
+    if (contactVisible) {
+      callBar.classList.remove('is-visible');
+      callBar.classList.add('is-hidden');
       hasEntered = true;
+    } else if (heroRect.bottom <= triggerPoint && !hasEntered) {
+      hasEntered = true;
+      callBar.classList.remove('is-hidden');
       callBar.classList.add('is-visible');
     } else if (heroRect.bottom > triggerPoint) {
       callBar.classList.remove('is-visible');
+      callBar.classList.remove('is-hidden');
       hasEntered = false;
     }
   };
