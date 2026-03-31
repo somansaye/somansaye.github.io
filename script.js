@@ -122,11 +122,16 @@ function initTopReset() {
 
   const resetToTop = () => {
     if (!window.location.hash || window.location.hash === '#top') {
-      window.scrollTo(0, 0);
+      if (window.location.hash === '#top') {
+        history.replaceState(null, '', window.location.pathname + window.location.search);
+      }
+      window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
     }
   };
 
+  window.addEventListener('load', resetToTop);
   window.addEventListener('pageshow', resetToTop);
+  window.setTimeout(resetToTop, 0);
   resetToTop();
 }
 
