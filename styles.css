@@ -110,7 +110,7 @@ body{font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Robo
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   transition: background 0.3s ease;
   z-index: 9999;
-  display: block !important;
+  display: block;
 }
 
 .call-button:hover {
@@ -141,6 +141,10 @@ body{font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Robo
   animation: pulse 2s ease-in-out infinite;
 }
 .call-bar{display:none}
+@media (min-width:721px){
+  .call-button{display:block}
+  .call-bar{display:none !important}
+}
 /* ===== Mobile header: hamburger + slide-down menu ===== */
 
 /* Hamburger button */
