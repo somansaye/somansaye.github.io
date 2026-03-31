@@ -44,6 +44,7 @@ function initContactForm() {
     form.reset();
     submitButton.disabled = false;
     submitButton.classList.remove('is-success');
+    submitButton.classList.remove('is-flip');
     submitButton.textContent = defaultButtonText;
   };
 
@@ -66,10 +67,13 @@ function initContactForm() {
 
       window.setTimeout(() => {
         form.classList.add('is-success');
+        submitButton.classList.remove('is-flip');
+        void submitButton.offsetWidth;
+        submitButton.classList.add('is-flip');
         submitButton.classList.add('is-success');
         submitButton.textContent = 'Thanks! Form submitted successfully.';
       }, 50);
-      window.setTimeout(resetForm, 2600);
+      window.setTimeout(resetForm, 3600);
     } catch (error) {
       window.alert('There was a problem submitting the form. Please call or email us directly.');
       submitButton.disabled = false;
