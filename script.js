@@ -89,6 +89,7 @@ function initContactForm() {
 
 function initAnchorScroll() {
   const header = document.querySelector('.header');
+  const menuButton = document.querySelector('.hamburger');
   if (!header) return;
 
   const getAnchorTarget = (target) => {
@@ -117,7 +118,16 @@ function initAnchorScroll() {
       if (!target) return;
       event.preventDefault();
       history.replaceState(null, '', hash);
-      scrollToHash(hash);
+      const menuWasOpen = document.body.classList.contains('menu-open');
+      if (menuWasOpen) {
+        document.body.classList.remove('menu-open');
+        if (menuButton) {
+          menuButton.setAttribute('aria-expanded', 'false');
+        }
+      }
+      window.setTimeout(() => {
+        scrollToHash(hash);
+      }, menuWasOpen ? 180 : 0);
     });
   });
 }
@@ -128,8 +138,13 @@ function initTopReset() {
   }
 
   const resetToTop = () => {
-    if (!window.location.hash || window.location.hash === '#top') {
-      if (window.location.hash === '#top') {
+    const navEntry = performance.getEntriesByType('navigation')[0];
+    const isReload = navEntry && navEntry.type === 'reload';
+    const isTopHash = window.location.hash === '#top';
+    const shouldClearHashOnLoad = isReload && window.location.hash;
+
+    if (!window.location.hash || isTopHash || shouldClearHashOnLoad) {
+      if (window.location.hash) {
         history.replaceState(null, '', window.location.pathname + window.location.search);
       }
       window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
